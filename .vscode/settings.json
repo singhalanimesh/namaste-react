@@ -1,5 +1,10 @@
 {
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
-  }
+  },
+  "editor.linkedEditing": true,
+  "emmet.preferences": {
+
+  },
+  "files.trimTrailingWhitespace": true
 }
