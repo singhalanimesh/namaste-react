@@ -87,4 +87,11 @@
   background-color: #f0f0f0;
 }
 
+.user-card{
+  padding: 10px;
+  border: 1px solid black;
+}
 
+.user-img{
+  width: 200px;
+}
