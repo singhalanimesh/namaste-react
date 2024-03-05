@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import RestaurantCard from "./RestaurantCard";
 import { Link } from "react-router-dom";
+import { BODY_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
+// import useBody from "../utils/useBody";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -15,16 +18,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    // const data = await fetch(
-    //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.632668364482797&lng=88.4359834715724&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    // );
-
-    const data = await fetch(
-      "https://corsproxy.org/?" +
-        encodeURIComponent(
-          "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.632668364482797&lng=88.4359834715724&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        )
-    );
+    const data = await fetch(BODY_URL);
 
     const json = await data.json();
     console.log(json);
@@ -34,7 +28,23 @@ const Body = () => {
     setFilteredRes(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    console.log(listOfRestaurants);
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false)
+    return (
+      <h1>
+        Looks like You are Offline!! Please Check Your Internet Connection
+      </h1>
+    );
+
+  // const listOfRestaurants = useBody();
+  // const [filteredRes, setFilteredRes] = useState([]);
+  // const [searchText, setSearchtext] = useState("");
+  // setFilteredRes(listOfRestaurants);
+  // console.log(listOfRestaurants);
 
   const filter = () => {
     const filteredList = filteredRes.filter(
