@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Shimmer from "./Shimmer";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { flatRestaurantCard } from "./RestaurantCard";
 import { Link } from "react-router-dom";
 import { BODY_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 // import useBody from "../utils/useBody";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
-
   const [searchText, setSearchtext] = useState("");
+  const [count, setCount] = useState(0);
+
+  const { LoggedInUser } = useContext(UserContext);
+  const { setUserName } = useContext(UserContext);
+
+  const RestaurantCardFlat = flatRestaurantCard(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -19,16 +25,14 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(BODY_URL);
-
     const json = await data.json();
-    console.log(json);
+
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRes(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    console.log(listOfRestaurants);
   };
 
   const onlineStatus = useOnlineStatus();
@@ -46,11 +50,16 @@ const Body = () => {
   // setFilteredRes(listOfRestaurants);
   // console.log(listOfRestaurants);
 
-  const filter = () => {
-    const filteredList = filteredRes.filter(
-      (restaurant) => restaurant.info.avgRating >= 4.0
-    );
-    setFilteredRes(filteredList);
+  const topRated = () => {
+    if (count % 2 == 0) {
+      const filteredList = filteredRes.filter(
+        (restaurant) => restaurant.info.avgRating >= 4.2
+      );
+      setFilteredRes(filteredList);
+    } else {
+      setFilteredRes(listOfRestaurants);
+    }
+    setCount(count + 1);
   };
 
   return !listOfRestaurants || listOfRestaurants.length === 0 ? (
@@ -78,9 +87,19 @@ const Body = () => {
           </button>
         </div>
         <div className="search m-4 p-4">
-          <button className="px-4 py-0.5 bg-[#f0f0f0] rounded-md  hover:bg-gray-300" onClick={() => filter()}>
+          <button
+            className="px-4 py-0.5 bg-[#f0f0f0] rounded-md  hover:bg-gray-300"
+            onClick={() => topRated()}
+          >
             Top rated Restaurants
           </button>
+        </div>
+        <div className="search m-4 p-4">
+          <input
+            className="border"
+            value={LoggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          ></input>
         </div>
       </div>
       <div className="flex flex-wrap">
@@ -89,7 +108,11 @@ const Body = () => {
             to={"/restaurants/" + restaurant.info.id}
             key={restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant?.info?.aggregatedDiscountInfoV3?.discountTag ? (
+              <RestaurantCardFlat resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

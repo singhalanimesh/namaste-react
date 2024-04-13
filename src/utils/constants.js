@@ -8,7 +8,7 @@ export const MENU_API =
   "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.632668364482797&lng=88.4359834715724&restaurantId=";
 
 export const BODY_URL =
-  "https://corsproxy.org/?" +
+  "https://thingproxy.freeboard.io/fetch/" +
   encodeURIComponent(
     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.632668364482797&lng=88.4359834715724&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
   );
