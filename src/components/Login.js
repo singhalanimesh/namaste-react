@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 const Login = () => {
   return (
-    <div className="bg-[#ffffee]">
+    <div className="bg-[#ffffee] px-64 pt-10 h-screen">
       <Formik
         intialValues={{
           email: "",
@@ -22,15 +22,15 @@ const Login = () => {
         }}
       >
         <Form>
-          <label htmlFor="email">Email: </label>
-          <Field name="email" type="email" />
+          <label htmlFor="email" className="p-2 m-2 text-lg">Email: </label>
+          <Field name="email" type="email"/>
           <ErrorMessage name="email" />
-          <p></p>
-          <label htmlFor="password">Password: </label>
+          <p className="p-2 m-2"></p>
+          <label htmlFor="password" className="p-2 m-2 text-lg">Password: </label>
           <Field name="password" type="text" />
           <ErrorMessage name="password" />
 
-          <button type="submit"> Submit </button>
+          <button type="submit" className="px-2 m-2 rounded-lg bg-slate-200"> Submit </button>
         </Form>
       </Formik>
     </div>
