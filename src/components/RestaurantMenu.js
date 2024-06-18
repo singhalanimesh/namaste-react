@@ -30,7 +30,7 @@ const RestaurantMenu = () => {
     );
 
   return (
-    <div className="bg-[#ffffee]">
+    <div className="pt-36 h-screen">
       <div className="w-7/12 p-8 text-left m-auto">
         <p className="text-2xl font-bold mb-2">{name}</p>
         <p className="text-lg text-green-600 mb-1">

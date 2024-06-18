@@ -14,7 +14,7 @@ const Cart = () => {
   console.log(cartItems);
 
   return (
-    <div className="bg-[#ffffee] h-screen">
+    <div className="pt-36 bg-[#ffffee] h-screen">
         <div className="text-center p-4 w-8/12 m-auto">
       <div className="flex justify-between">
         <p className="text-3xl font-bold">Cart</p>

@@ -16,12 +16,14 @@ const Body = () => {
 
   const { LoggedInUser } = useContext(UserContext);
   const { setUserName } = useContext(UserContext);
+  const onlineStatus = useOnlineStatus();
 
   const RestaurantCardFlat = flatRestaurantCard(RestaurantCard);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  if (onlineStatus == true) {
+    useEffect(() => {
+      fetchData();
+    }, []);
+  }
 
   const fetchData = async () => {
     const data = await fetch(BODY_URL);
@@ -34,8 +36,6 @@ const Body = () => {
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
-
-  const onlineStatus = useOnlineStatus();
 
   if (onlineStatus === false)
     return (
@@ -65,7 +65,7 @@ const Body = () => {
   return !listOfRestaurants || listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body bg-[#ffffee]">
+    <div className="pt-36 body bg-[#ffffee]">
       <div className="filter flex">
         <div className="search m-4 p-4">
           <input

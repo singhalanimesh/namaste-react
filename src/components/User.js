@@ -5,7 +5,7 @@ const User = (props) => {
   const [count2, setCount2] = useState(2);
 
   return (
-    <div className="user-card">
+    <div className="pt-36 h-screen user-card">
       <h2>Count: {count}</h2>
       <h2>Count2: {count2}</h2>
       <h2>Name: Animesh Singhal</h2>

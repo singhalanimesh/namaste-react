@@ -14,7 +14,7 @@ const Shimmer = () => {
   ];
 
   return (
-    <div className="shimmer-container flex flex-wrap  bg-[#ffffee]">
+    <div className="pt-36 h-screen shimmer-container flex flex-wrap  bg-[#ffffee]">
       {words.map((display, index) => (
         <div
           key={index}

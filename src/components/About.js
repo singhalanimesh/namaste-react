@@ -4,7 +4,7 @@ import UserClass from "./UserClass";
 
 const About = () => {
   return (
-    <div className=" bg-[#ffffee]">
+    <div className="pt-36 bg-[#ffffee] h-screen">
       <div className="flex ml-4">
         <h1 className="m-4 p-4 text-4xl border border-solid border-black w-[280]">
           ABOUT US

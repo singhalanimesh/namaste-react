@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 const Login = () => {
   return (
-    <div className="bg-[#ffffee] px-64 pt-10 h-screen">
+    <div className="pt-48 bg-[#ffffee] px-64 h-screen">
       <Formik
         intialValues={{
           email: "",

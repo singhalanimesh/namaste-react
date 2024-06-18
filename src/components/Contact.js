@@ -21,7 +21,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex p-8 bg-[#ffffee]">
+    <div className="px-8 pt-36 h-screen flex bg-[#ffffee]">
       <div className="flex flex-wrap py-4">
         <p className="text-4xl  hover:cursor-pointer">Contact Me Via -</p>
       </div>
